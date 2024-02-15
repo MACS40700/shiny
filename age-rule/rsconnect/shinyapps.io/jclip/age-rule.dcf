@@ -1,0 +1,10 @@
+name: age-rule
+title:
+username: jclip
+account: jclip
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11218951
+bundleId: 8252477
+url: https://jclip.shinyapps.io/age-rule/
+version: 1
