@@ -109,7 +109,7 @@ server <- function(input, output) {
     ggplot(d, aes(x=year, y=count, color=name)) +
       facet_wrap(~ sex, scales="free", nrow = 2) +
       geom_line(size=1) + 
-      geom_label_repel(aes(label = label), show_guide  = FALSE,
+      geom_label_repel(aes(label = label), show.legend  = FALSE,
                        nudge_x = 1,  nudge_y = 1, na.rm = TRUE) +
       scale_color_viridis_d(option = "magma", end = 0.9) +
       theme_bw(15)
