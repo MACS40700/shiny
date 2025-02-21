@@ -2,6 +2,7 @@
 # state and territory data here: https://www.ssa.gov/oact/babynames/limits.html
 
 library(viridis) 
+library(DT)
 library(tidyverse)
 library(ggrepel)
 library(shinythemes)
@@ -12,7 +13,9 @@ options(stringsAsFactors=FALSE)
 
 babyNames <- readRDS("baby_names.rds")
 
-ui <- fluidPage(theme = shinytheme("cerulean"),
+ui <- fluidPage(theme = shinytheme("readable"),
+                tags$head(
+                  tags$link(rel = "stylesheet", type = "text/css", href = "custom.css") ),
 # Define UI for application that draws a histogram
                   
   h1("Popularity of baby names in the USA since 1880"),
@@ -25,7 +28,7 @@ navlistPanel(
              mainPanel( textInput("names",
                                   "Lookup names (comma separated):",
                                   value="Taylor, Travis, Jim, Pam, Dwight")),
-               plotOutput("density"),
+               plotOutput("density"), 
                width=11),
   
   
@@ -34,7 +37,7 @@ navlistPanel(
                plotOutput("hist"),
                width=11)
   ),
-  tabPanel("Least Popular Names Hist",
+  tabPanel("Least Popular Names Hist", 
            
   mainPanel(
     plotOutput("histLeast"),
@@ -43,16 +46,17 @@ navlistPanel(
   tabPanel("Least Popular Names Table",
            fluidRow(
              column(12,
-                    dataTableOutput('table')
+                    DTOutput('table')
              )))),
 
   
  column(5,             # Input: Slider for the number of bins ----
                      sliderInput("year", "Birth year",
                                  min=min(babyNames$year),
-                                 max=max(babyNames$year), value = 1989), style = "margin-top: -80px;")
+                                 max=max(babyNames$year), value = 1989), style = "margin-top: -80px")
 )
-  
+
+
 
 # set up plotting
 # Histogram plotter
@@ -82,9 +86,9 @@ makeHistogram <- function(inputYear, topNum = 10, topNames=TRUE) {
     facet_wrap(~ sex, scale="free") +
     geom_bar(stat="identity") +
     labs(x="Baby name", y="Number of babies", fill="Sex") +
-    scale_fill_grey() + 
-    theme_bw(17) +
-    theme(axis.text.x = element_text(angle=60, hjust=1))
+    scale_fill_manual(values = c("#56a89f", "#193807")) + 
+    theme_minimal(17) +
+    theme(axis.text.x = element_text(angle=45, hjust=1))
 }
 
                 
@@ -111,11 +115,11 @@ server <- function(input, output) {
       geom_line(linewidth = 1) + 
       geom_label_repel(aes(label = label), show.legend  = FALSE,
                        nudge_x = 1,  nudge_y = 1, na.rm = TRUE) +
-      scale_color_viridis_d(option = "magma", end = 0.9) +
-      theme_bw(15)
+      scale_color_viridis_d( end = 0.9) +
+      theme_minimal(15)
   })
   
-  output$table <- renderDataTable(
+  output$table <- renderDT(
     babyNames %>%
       mutate(name=str_to_title(name)) %>% 
       filter(year == input$year) %>%

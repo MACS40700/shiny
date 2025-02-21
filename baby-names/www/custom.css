@@ -1,0 +1,58 @@
+/* Get a fancy font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+body {
+  background-color: white;
+  color: #355652 ; /* text color */
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+/* Change header text to imported font */
+h1, h2, h3, h4 {
+  font-family: 'Yusei Magic', sans-serif;
+}
+
+/* Make text visible on inputs */
+.shiny-input-container {
+  color: #56a89f;
+}
+
+.main-sidebar {
+    background-color: #193807;
+}
+
+.tab-pane { background-color: white; width: 100%; color:  #56a89f }
+
+ 
+
+
+.js-irs-0  .irs-bar {width: 100%; background:#56a89f; border-top: 1px solid #193807; border-bottom: 1px solid #193807;}
+.js-irs-0  .irs-grid-text {color:#193807 ; bottom: 17px; z-index: 1;}
+.js-irs-0  .irs-grid-pol {display: none;}
+.js-irs-0  .irs-max {color: #193807;}
+.js-irs-0 .irs-min {color: #193807;}
+.js-irs-0 .irs-single {color:white; background:#193807;}
+              
+              
+.main_menu_theme {
+    
+    background-color: pink;
+    text-align: right;
+    font-size: 20px;
+    }
+    
+a{
+  color: #193807;
+    background-color: #FFF;
+}
+
+a:hover{
+  color: #56a89f;
+    background-color: #FFF;
+}
+
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+  background-color: #193807;
+  color: #FFF;
+}
